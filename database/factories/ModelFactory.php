@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Generator as Faker;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,13 +13,19 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
-    return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-    ];
+$factory->define(App\Post::class, function (Faker $faker) {
+    //$title = $faker->sentence(rand(3,8), true);
+	$txt = $faker->realText(rand(300,1000));
+	//$isPublished = rand(1,5) > 1;
+	
+	$createdAt = $faker->dateTimeBetween('-3 months','-2 months');
+	
+	$data = [
+		'user_id' => 1,
+		'body' => $txt,
+		'created_at' => $createdAt,
+		'updated_at' => $createdAt,
+	];
+	
+	return $data;
 });

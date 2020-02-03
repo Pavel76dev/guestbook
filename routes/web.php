@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'GuestBookController@guestbook')->name('guestbook');;
 
 Auth::routes();
 
+Route::resource('/post', 'PostController');
+Route::resource('/comment', 'CommentController');
 Route::get('/home', 'HomeController@index');
